@@ -21,7 +21,7 @@ def update_products():
         typer.echo(f"📌 Оновлення куплених товарів: {len(products)} шт.")
         updated_count = 0
 
-        for product in tqdm(products, desc="Оновлення товарів", unit="product"):
+        for product in tqdm.tqdm(products, desc="Оновлення товарів", unit="product", ncols=100):
             try:
                 html = fetch_page("https://prom.ua" + product.url)
                 soup = BeautifulSoup(html, "html.parser")
