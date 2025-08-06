@@ -32,6 +32,9 @@ def update_products():
 
                 if category:
                     product.category = category
+                
+                if price:
+                    product.price = price
                     
                 updated_count += 1
                 typer.echo(f"✅ {product.name} (ID: {product.id}) → {bought_count}")
