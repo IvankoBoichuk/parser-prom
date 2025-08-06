@@ -39,6 +39,8 @@ def update_products():
                     
                 updated_count += 1
                 # typer.echo(f"✅ {product.name} (ID: {product.id}) → {bought_count}")
+                if updated_count % 50 == 0:
+                    session.commit()
                 
             except Exception as e:
                 typer.echo(f"⚠️ Помилка з {product.id}: {e}")
