@@ -1,4 +1,5 @@
 import re
+import tqdm
 import typer
 from bs4 import BeautifulSoup
 from database import init_db
@@ -20,7 +21,7 @@ def update_products():
         typer.echo(f"📌 Оновлення куплених товарів: {len(products)} шт.")
         updated_count = 0
 
-        for product in products:
+        for product in tqdm(products, desc="Оновлення товарів", unit="product"):
             try:
                 html = fetch_page("https://prom.ua" + product.url)
                 soup = BeautifulSoup(html, "html.parser")
@@ -37,7 +38,7 @@ def update_products():
                     product.price = price
                     
                 updated_count += 1
-                typer.echo(f"✅ {product.name} (ID: {product.id}) → {bought_count}")
+                # typer.echo(f"✅ {product.name} (ID: {product.id}) → {bought_count}")
                 
             except Exception as e:
                 typer.echo(f"⚠️ Помилка з {product.id}: {e}")
